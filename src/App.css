@@ -1,42 +1,470 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.vk-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Шапка ВК */
+.vk-header {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 56px;
+  background-color: #4680c2;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.vk-logo {
+  font-size: 22px;
+  font-weight: 600;
+  margin-right: 30px;
+}
+
+.vk-search {
+  flex-grow: 1;
+  max-width: 600px;
+}
+
+.vk-search input {
+  width: 100%;
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: none;
+  background-color: #3a6ea5;
+  color: white;
+  outline: none;
+}
+
+.vk-search input::placeholder {
+  color: #c9d6e8;
+}
+
+.vk-user img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+
+/* Основной контейнер */
+.vk-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+/* Левое меню */
+.vk-sidebar {
+  width: 210px;
+  padding: 20px 0;
+  background-color: #fafbfc;
+  border-right: 1px solid #e7e8ec;
+}
+
+.vk-menu {
+  padding: 0 10px;
+}
+
+.menu-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.menu-item:hover {
+  background-color: #e7e8ec;
+}
+
+.menu-item.active {
+  background-color: #e5ebf1;
+  color: #2a5885;
+  font-weight: 500;
+}
+
+/* Основное содержимое */
+.vk-main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+/* Шапка профиля */
+.profile-header {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.profile-cover {
+  height: 300px;
+  overflow: hidden;
+}
+
+.profile-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-info {
+  display: flex;
+  padding: 20px;
+  position: relative;
+}
+
+.profile-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid white;
+  overflow: hidden;
+  position: absolute;
+  top: -70px;
+  left: 20px;
+  background-color: white;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-details {
+  margin-left: 180px;
+}
+
+.profile-details h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.profile-status {
+  color: #656565;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.stat-value {
+  font-weight: 600;
+  color: #2a5885;
+  font-size: 16px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.stat-label {
+  font-size: 12px;
+  color: #656565;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.profile-nav {
+  display: flex;
+  border-top: 1px solid #e7e8ec;
+  padding: 0 20px;
 }
 
-.card {
-  padding: 2em;
+.nav-item {
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #656565;
+  border-bottom: 2px solid transparent;
 }
 
-.read-the-docs {
-  color: #888;
+.nav-item:hover {
+  color: #2a5885;
+}
+
+.nav-item.active {
+  color: #2a5885;
+  border-bottom-color: #5181b8;
+  font-weight: 500;
+}
+
+/* Основной контент профиля */
+.profile-content {
+  display: flex;
+  gap: 20px;
+}
+
+.left-column {
+  width: 310px;
+}
+
+.right-column {
+  flex-grow: 1;
+}
+
+/* Блоки информации */
+.info-block {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.info-block h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2a5885;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e7e8ec;
+}
+
+.info-block ul {
+  list-style: none;
+}
+
+.info-block ul li {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.info-label {
+  width: 120px;
+  color: #656565;
+  font-size: 14px;
+}
+
+.info-value {
+  flex-grow: 1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Фотографии */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.photo-item {
+  height: 120px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.show-all {
+  width: 100%;
+  padding: 8px;
+  background-color: #f0f2f5;
+  border: none;
+  border-radius: 4px;
+  color: #2a5885;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.show-all:hover {
+  background-color: #e7e8ec;
+}
+
+/* Альбомы */
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.album-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.album-item img {
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.album-item span {
+  font-size: 12px;
+  color: #656565;
+}
+
+/* Создание поста */
+.post-creator {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.creator-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.creator-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.creator-header textarea {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #e7e8ec;
+  border-radius: 4px;
+  resize: none;
+  height: 60px;
+  outline: none;
+}
+
+.creator-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.creator-actions button {
+  padding: 8px 20px;
+  background-color: #5181b8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.creator-actions button:hover {
+  background-color: #4680c2;
+}
+
+/* Посты */
+.post {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.pinned-post {
+  border-left: 3px solid #5181b8;
+}
+
+.post-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.post-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.post-author {
+  flex-grow: 1;
+}
+
+.author-name {
+  font-weight: 500;
+  color: #2a5885;
+  font-size: 14px;
+}
+
+.post-time {
+  font-size: 12px;
+  color: #656565;
+}
+
+.pinned-label {
+  color: #5181b8;
+  font-size: 12px;
+}
+
+.post-content {
+  margin-bottom: 15px;
+}
+
+.post-content p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.post-photo {
+  margin-top: 10px;
+}
+
+.post-photo img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.post-stats {
+  display: flex;
+  gap: 15px;
+  padding: 10px 0;
+  border-top: 1px solid #e7e8ec;
+  border-bottom: 1px solid #e7e8ec;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #656565;
+}
+
+.likes {
+  color: #656565;
+}
+
+.post-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.post-actions button {
+  flex-grow: 1;
+  padding: 8px;
+  background-color: #f0f2f5;
+  border: none;
+  border-radius: 4px;
+  color: #656565;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.post-actions button:hover {
+  background-color: #e7e8ec;
+}
+
+.post-actions button.liked {
+  color: #5181b8;
 }
