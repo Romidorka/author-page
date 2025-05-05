@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PostList from './components/PostList';
 import postsData from './data/posts.json';
 import './App.css';
 
@@ -16,7 +17,7 @@ function App() {
     city: 'Емецк, Архангельская область',
     career: 'Поэт, моряк, рабочий',
     education: 'Литературный институт им. А.М. Горького',
-    friends: 87200,
+    friends: 872,
     followers: 154300,
     photos: 126,
     videos: 18,
@@ -30,7 +31,7 @@ function App() {
   const handlePostSubmit = (e) => {
     e.preventDefault();
     if (!newPost.trim()) return;
-    
+
     const post = {
       id: posts.length + 1,
       content: newPost,
@@ -40,7 +41,7 @@ function App() {
       shares: 0,
       isLiked: false
     };
-    
+
     setPosts([post, ...posts]);
     setNewPost('');
   };
@@ -102,7 +103,7 @@ function App() {
               <div className="profile-details">
                 <h1>{user.name}</h1>
                 <div className="profile-status">{user.status}</div>
-                
+
                 <div className="profile-stats">
                   <div className="stat">
                     <div className="stat-value">{user.friends}</div>
@@ -123,7 +124,7 @@ function App() {
                 </div>
               </div>
             </div>
-            
+
             <nav className="profile-nav">
               <div className="nav-item active">Стена</div>
               <div className="nav-item">Информация</div>
@@ -165,19 +166,19 @@ function App() {
                   </li>
                 </ul>
               </div>
-              
+
               <div className="info-block">
                 <h3>Фотографии ({user.photos})</h3>
                 <div className="photo-grid">
                   {[...Array(4)].map((_, i) => (
                     <div key={i} className="photo-item">
-                      <img src={`https://rubtsov-poetry.ru/wp-content/uploads/2020/05/rubtsov-${i+1}.jpg`} alt={`Фото ${i+1}`} />
+                      <img src={`https://rubtsov-poetry.ru/photo_archiv/${i+4}.jpg`} alt={`Фото ${i + 1}`} />
                     </div>
                   ))}
                 </div>
                 <button className="show-all">Показать все фотографии</button>
               </div>
-              
+
               <div className="info-block">
                 <h3>Альбомы ({user.albums})</h3>
                 <div className="albums-grid">
@@ -192,15 +193,15 @@ function App() {
                 </div>
               </div>
             </div>
-            
+
             {/* Правая колонка - стена */}
             <div className="right-column">
               {/* Создание поста (от имени администратора) */}
-              <div className="post-creator">
+              {/* <div className="post-creator">
                 <div className="creator-header">
                   <img src="https://sun1-87.userapi.com/s/v1/ig2/r3T4zUx6pJzWj8Y3QZ3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q.jpg?size=50x50&quality=96&crop=0,0,400,400&ava=1" alt="Admin" />
-                  <textarea 
-                    placeholder="Расскажите о поэте..." 
+                  <textarea
+                    placeholder="Расскажите о поэте..."
                     value={newPost}
                     onChange={(e) => setNewPost(e.target.value)}
                   />
@@ -208,85 +209,14 @@ function App() {
                 <div className="creator-actions">
                   <button onClick={handlePostSubmit}>Опубликовать</button>
                 </div>
-              </div>
-              
-              {/* Закрепленный пост */}
-              {posts.filter(p => p.isPinned).map(post => (
-                <div key={post.id} className="post pinned-post">
-                  <div className="post-header">
-                    <img src="https://sun1-87.userapi.com/s/v1/ig2/r3T4zUx6pJzWj8Y3QZ3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q.jpg?size=50x50&quality=96&crop=0,0,400,400&ava=1" alt="Admin" />
-                    <div className="post-author">
-                      <div className="author-name">Сообщество Николая Рубцова</div>
-                      <div className="post-time">{post.time} · <span className="pinned-label">Закреплено</span></div>
-                    </div>
-                  </div>
-                  
-                  <div className="post-content">
-                    <p>{post.content}</p>
-                    {post.photos && (
-                      <div className="post-photo">
-                        <img src={post.photos[0]} alt="Фото к посту" />
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="post-stats">
-                    <span className="likes">{post.likes.toLocaleString()} ❤</span>
-                    <span className="comments">{post.comments.toLocaleString()} комментариев</span>
-                    <span className="shares">{post.shares.toLocaleString()} репостов</span>
-                  </div>
-                  
-                  <div className="post-actions">
-                    <button 
-                      className={post.isLiked ? 'liked' : ''}
-                      onClick={() => handleLike(post.id)}
-                    >
-                      Нравится
-                    </button>
-                    <button>Комментировать</button>
-                    <button>Поделиться</button>
-                  </div>
-                </div>
-              ))}
-              
-              {/* Остальные посты */}
-              {posts.filter(p => !p.isPinned).map(post => (
-                <div key={post.id} className="post">
-                  <div className="post-header">
-                    <img src="https://sun1-87.userapi.com/s/v1/ig2/r3T4zUx6pJzWj8Y3QZ3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q3Q.jpg?size=50x50&quality=96&crop=0,0,400,400&ava=1" alt="Admin" />
-                    <div className="post-author">
-                      <div className="author-name">Сообщество Николая Рубцова</div>
-                      <div className="post-time">{post.time}</div>
-                    </div>
-                  </div>
-                  
-                  <div className="post-content">
-                    <p>{post.content}</p>
-                    {post.photos && (
-                      <div className="post-photo">
-                        <img src={post.photos[0]} alt="Фото к посту" />
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="post-stats">
-                    <span className="likes">{post.likes.toLocaleString()} ❤</span>
-                    <span className="comments">{post.comments.toLocaleString()} комментариев</span>
-                    <span className="shares">{post.shares.toLocaleString()} репостов</span>
-                  </div>
-                  
-                  <div className="post-actions">
-                    <button 
-                      className={post.isLiked ? 'liked' : ''}
-                      onClick={() => handleLike(post.id)}
-                    >
-                      Нравится
-                    </button>
-                    <button>Комментировать</button>
-                    <button>Поделиться</button>
-                  </div>
-                </div>
-              ))}
+              </div> */}
+
+              {/* Посты */}
+              <PostList
+                posts={posts}
+                onLike={handleLike}
+                isAdmin={true}
+              />
             </div>
           </div>
         </main>
